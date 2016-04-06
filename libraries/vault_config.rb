@@ -86,6 +86,8 @@ module VaultCookbook
         notifying_block do
           directory ::File.dirname(new_resource.path) do
             recursive true
+            owner new_resource.owner
+            group new_resource.group
           end
 
           file new_resource.path do
