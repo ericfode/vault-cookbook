@@ -37,6 +37,8 @@ module VaultCookbook
           archive_basename: archive_basename,
           archive_checksum: binary_checksum(node, new_resource),
           extract_to: '/opt/vault'
+          user: 'vault'
+          group: 'vault'
         )
       end
 
@@ -49,11 +51,14 @@ module VaultCookbook
         notifying_block do
           directory ::File.join(options[:extract_to], new_resource.version) do
             recursive true
+            owner new_resource.user
+            group new_resource.group
           end
 
           zipfile options[:archive_basename] do
             path ::File.join(options[:extract_to], new_resource.version)
             source archive_url
+            owner new_resource.user
             checksum options[:archive_checksum]
             not_if { ::File.exist?(vault_program) }
           end
