@@ -50,6 +50,10 @@ module VaultCookbook
       # The location of the Vault executable.
       # @return [String]
       attribute(:program, kind_of: String, default: '/usr/local/bin/vault')
+      # @!attribute initsystem
+      # The location of the Vault executable.
+      # @return [String]
+      attribute(:initsystem, kind_of: String, default: 'sysvinit')
     end
   end
 
@@ -89,10 +93,10 @@ module VaultCookbook
         service.user(new_resource.user)
         service.environment(new_resource.environment)
         service.restart_on_update(true)
-        service.provider(:sysvinit)
+        service.provider(new_resource.initsystem.to_sym)
 
         if node.platform_family?('rhel') && node.platform_version.to_i == 6
-          service.provider(:sysvinit)
+          service.provider(new_resource.initsystem.to_sym)
         end
       end
     end
