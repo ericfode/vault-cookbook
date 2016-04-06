@@ -26,6 +26,8 @@ module VaultCookbook
       # The version of Vault to install.
       # @return [String]
       attribute(:version, kind_of: String, name_attribute: true)
+      attribute(:user, kind_of: String, default: 'vault')
+      attribute(:group, kind_of: String, default: 'vault')
 
       def vault_program
         @program ||= provider_for_action(:vault_program).vault_program

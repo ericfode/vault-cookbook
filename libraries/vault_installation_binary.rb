@@ -37,8 +37,6 @@ module VaultCookbook
           archive_basename: archive_basename,
           archive_checksum: binary_checksum(node, new_resource),
           extract_to: '/opt/vault',
-          user: 'vault',
-          group: 'vault'
         )
       end
 
