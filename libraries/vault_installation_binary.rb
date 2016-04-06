@@ -36,8 +36,8 @@ module VaultCookbook
           archive_url: default_archive_url % { version: new_resource.version, basename: archive_basename },
           archive_basename: archive_basename,
           archive_checksum: binary_checksum(node, new_resource),
-          extract_to: '/opt/vault'
-          user: 'vault'
+          extract_to: '/opt/vault',
+          user: 'vault',
           group: 'vault'
         )
       end
