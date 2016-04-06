@@ -56,7 +56,8 @@ module VaultCookbook
           zipfile options[:archive_basename] do
             path ::File.join(options[:extract_to], new_resource.version)
             source archive_url
-            owner new_resource.user
+            files_owner new_resource.user
+            files_group new_resource.group
             checksum options[:archive_checksum]
             not_if { ::File.exist?(vault_program) }
           end
